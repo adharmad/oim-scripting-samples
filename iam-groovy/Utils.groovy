@@ -26,4 +26,15 @@ class Utils {
 		grpKey = rs.getLongValue('Groups.Key')
 		return grpKey
     }    
+
+    static long getITResDefKey(itDefIntf, itDefName) {
+        def itDefKey = 0
+		def itDefMap = [
+            'IT Resources Type Definition.Server Type' : itDefName
+        ]
+		def rs = itDefIntf.getITResourceDefinition(itDefMap)
+		rs.goToRow(0)
+		itDefKey = rs.getLongValue('IT Resources Type Definition.Key')
+		return itDefKey
+    }
 }
