@@ -3,9 +3,9 @@ import oracle.iam.identity.rolemgmt.vo.Role
 
 XLClient oimClient = new XLClient('xelsysadm', 'Welcome1')
 
-def polName = 'testpol1'
-def roleName = 'role1'
-def objName = 'res3'
+def polName = 'testpol2'
+def roleName = 'role2'
+def objName = 'res2'
 
 def apIntf = oimClient.apIntf
 def objIntf = oimClient.objIntf

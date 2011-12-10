@@ -8,12 +8,14 @@ import oracle.iam.platform.OIMClient
 
 import oracle.iam.identity.usermgmt.api.UserManager
 import oracle.iam.identity.rolemgmt.api.RoleManager
-import oracle.iam.provisioning.api.ProvisioningServiceInternal
+//import oracle.iam.provisioning.api.ProvisioningServiceInternal
 
 class XLClient {
 
     // constants
     static USR_INTF = "Thor.API.Operations.tcUserOperationsIntf"
+    static IMP_INTF = "Thor.API.Operations.tcImportOperationsIntf"
+    static EXP_INTF = "Thor.API.Operations.tcExportOperationsIntf"
     static ORG_INTF = "Thor.API.Operations.tcOrganizationOperationsIntf"
     static GRP_INTF = "Thor.API.Operations.tcGroupOperationsIntf"
     static RECON_INTF = "Thor.API.Operations.tcReconciliationOperationsIntf"
@@ -30,6 +32,8 @@ class XLClient {
 
     // api interfaces
     def usrIntf
+    def impIntf
+    def expIntf
     def orgIntf
     def grpIntf
     def reconIntf
@@ -57,14 +61,25 @@ class XLClient {
         initInterfaces()
     }    
 
+    XLClient (jndiProps, login, password) {
+        println "logging into OIM"
+        factory = new tcUtilityFactory(jndiProps, login, password)
+        oimClient = new OIMClient(jndiProps)
+        oimClient.login(login, password)
+        println "login successful"
+        initInterfaces()
+    }    
+
     void initInterfaces() {
         //services
         usrMgr = oimClient.getService(UserManager.class)    
         roleMgr = oimClient.getService(RoleManager.class)
-        provIntSvc = oimClient.getService(ProvisioningServiceInternal.class)
+        //provIntSvc = oimClient.getService(ProvisioningServiceInternal.class)
 
         // interfaces
         usrIntf = factory.getUtility(USR_INTF)
+        impIntf = factory.getUtility(IMP_INTF)
+        expIntf = factory.getUtility(EXP_INTF)
         orgIntf = factory.getUtility(ORG_INTF)
         grpIntf = factory.getUtility(GRP_INTF)
         reconIntf = factory.getUtility(RECON_INTF)
