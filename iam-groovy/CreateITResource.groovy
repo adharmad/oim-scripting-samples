@@ -6,7 +6,7 @@ def jndiProps = [
 XLClient oimClient = new XLClient(new Hashtable(jndiProps), 'xelsysadm', 'Welcome1')
 //XLClient oimClient = new XLClient('xelsysadm', 'Welcome1')
 
-def itDefName = 'res1type'
+def itDefName = 'footype'
 def itResName = args[0]
 def itInstIntf = oimClient.itInstIntf
 def itDefIntf = oimClient.itDefIntf
@@ -17,7 +17,8 @@ println "ITRes definition key = ${itDefKey}"
 def itResMap = [
     'IT Resources Type Definition.Key' : itDefKey.toString(),
     'IT Resources.Name' : itResName,
-    'a' : 'foo' + itResName
+    'p' : 'foo' + itResName,
+    'q' : 'boo' + itResName
 ]
 
 def itResKey = itInstIntf.createITResourceInstance(itResMap)

@@ -10,11 +10,11 @@ def objIntf = oimClient.objIntf
 
 def objKey = Utils.getObjectKey(objIntf, objName)
 
-for (i in 1..numInstances) {
+for (i in 1..numUsers) {
     def usrLogin = usrPrefix + i;
     def usrKey = Utils.getUserKey(usrIntf, usrLogin)
     def oiuKey = usrIntf.provisionObject(usrKey, objKey)
-    println "Provisioned object ${objName} to User ${usrName}, oiu_key = ${oiuKey}"
+    println "Provisioned object ${objName} to User ${usrLogin}, oiu_key = ${oiuKey}"
 }
 
 oimClient.close()

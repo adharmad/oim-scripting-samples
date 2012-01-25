@@ -13,7 +13,8 @@ for (i in 1..numUsers) {
     def usrMap = [
         'User Login' : login ,
         'First Name' : login + 'First',
-        'Middle Name' : login + 'Middle' ,
+        //'Middle Name' : login + 'Middle' ,
+        'Middle Name' : 'YYYY',
         'Last Name' : login + 'Last' ,
         'usr_password' : 'Welcome1',
         'Role' : 'Full-Time',

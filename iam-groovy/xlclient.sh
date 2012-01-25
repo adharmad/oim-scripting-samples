@@ -1,8 +1,8 @@
-export JAVA_HOME=/scratch/adharmad/jdk1.6.0_20
-export XLHOME=/ade/adharmad_upg1/oracle/work/OIMDesignConsole
-export GROOVY_HOME=/scratch/adharmad/devtools/groovy-1.8.4
-export OIM_SERVER=/ade/adharmad_upg1/oracle/work/OIM
-export WL_HOME=/ade/adharmad_upg1/tklocal/middleware
+export JAVA_HOME=
+export XLHOME=
+export GROOVY_HOME=
+export OIM_SERVER=
+export WL_HOME=
 export APPSERVER_TYPE=wls
 
 
