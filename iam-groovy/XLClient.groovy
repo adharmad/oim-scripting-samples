@@ -8,7 +8,7 @@ import oracle.iam.platform.OIMClient
 
 import oracle.iam.identity.usermgmt.api.UserManager
 import oracle.iam.identity.rolemgmt.api.RoleManager
-//import oracle.iam.provisioning.api.ProvisioningServiceInternal
+import oracle.iam.provisioning.api.ProvisioningServiceInternal
 
 class XLClient {
 
@@ -74,7 +74,7 @@ class XLClient {
         //services
         usrMgr = oimClient.getService(UserManager.class)    
         roleMgr = oimClient.getService(RoleManager.class)
-        //provIntSvc = oimClient.getService(ProvisioningServiceInternal.class)
+        provIntSvc = oimClient.getService(ProvisioningServiceInternal.class)
 
         // interfaces
         usrIntf = factory.getUtility(USR_INTF)

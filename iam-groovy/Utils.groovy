@@ -37,4 +37,23 @@ class Utils {
 		itDefKey = rs.getLongValue('IT Resources Type Definition.Key')
 		return itDefKey
     }
+
+    static void printRS(rs) {
+        println "Count = ${rs.getRowCount()}\n"
+        def cols = rs.getColumnNames()
+
+        for (i in 0..rs.getRowCount()-1) {
+            rs.goToRow(i)
+
+            for (j in 0..cols.length-1) {
+                def col = cols[j]
+                if (!col.contains('Row Version')) {
+                    println "${col}\t\t: ${rs.getStringValue(col)}"
+                }
+            }
+
+            println "--------------------------------------"
+
+        }
+    }
 }
