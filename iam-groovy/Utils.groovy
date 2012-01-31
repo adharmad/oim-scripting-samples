@@ -1,3 +1,6 @@
+import oracle.iam.request.dataset.vo.RequestDataSet
+import oracle.iam.request.dataset.vo.AttributeReference
+
 class Utils {
 
     static long getObjectKey(objIntf, objName) {
@@ -37,6 +40,45 @@ class Utils {
 		itDefKey = rs.getLongValue('IT Resources Type Definition.Key')
 		return itDefKey
     }
+
+
+    static long getITResInstKey(itInstIntf, itInstName) {
+        def itInstKey = 0
+		def itInstMap = [
+            'IT Resources.Name' : itInstName
+        ]
+		def rs = itInstIntf.findITResourceInstances(itInstMap)
+		rs.goToRow(0)
+		itInstKey = rs.getLongValue('IT Resources.Key')
+		return itInstKey
+    }
+
+    static RequestDataSet createDataSet(dsid, ro) {
+        def rds = new RequestDataSet()
+
+        rds.setName("ProvisionResourceOBJ_" + dsid)
+        rds.setOperation("Create")
+        rds.setEntity(ro)
+
+        def fields = ['itres', 'login', 'first', 'last', 'email']
+        def lst = rds.getAttributeReference()
+        
+        for (f in fields) {
+            AttributeReference ref = new AttributeReference()
+            ref.setHidden(false)
+            ref.setLength(new BigInteger("50"))
+            ref.setName(f)
+            ref.setAttrRef(f)
+            ref.setRequired(true)
+            ref.setType("String")
+            ref.setWidget("text")
+            ref.setAvailableInBulk(false)
+            lst.add(ref)
+        }
+
+        return rds
+    }
+
 
     static void printRS(rs) {
         println "Count = ${rs.getRowCount()}\n"

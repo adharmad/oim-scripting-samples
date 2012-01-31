@@ -8,7 +8,10 @@ import oracle.iam.platform.OIMClient
 
 import oracle.iam.identity.usermgmt.api.UserManager
 import oracle.iam.identity.rolemgmt.api.RoleManager
+import oracle.iam.request.api.RequestDataSetService
+
 import oracle.iam.provisioning.api.ProvisioningServiceInternal
+import oracle.iam.provisioning.api.ApplicationInstanceService
 
 class XLClient {
 
@@ -24,11 +27,14 @@ class XLClient {
     static ITDEF_INTF = "Thor.API.Operations.tcITResourceDefinitionOperationsIntf"
     static ITINST_INTF = "Thor.API.Operations.tcITResourceInstanceOperationsIntf"
     static AP_INTF = "Thor.API.Operations.tcAccessPolicyOperationsIntf"
+    static FI_INTF = "Thor.API.Operations.tcFormInstanceOperationsIntf"
     
     // service interfaces
     def usrMgr
     def roleMgr
     def provIntSvc
+    def aiSvc
+    def rdsSvc
 
     // api interfaces
     def usrIntf
@@ -42,6 +48,7 @@ class XLClient {
     def itInstIntf
     def itDefIntf
     def apIntf
+    def fiIntf
 
     private factory 
     private oimClient
@@ -75,6 +82,8 @@ class XLClient {
         usrMgr = oimClient.getService(UserManager.class)    
         roleMgr = oimClient.getService(RoleManager.class)
         provIntSvc = oimClient.getService(ProvisioningServiceInternal.class)
+        aiSvc = oimClient.getService(ApplicationInstanceService.class)
+        rdsSvc = oimClient.getService(RequestDataSetService.class)
 
         // interfaces
         usrIntf = factory.getUtility(USR_INTF)
@@ -88,6 +97,7 @@ class XLClient {
         itInstIntf = factory.getUtility(ITINST_INTF)
         itDefIntf = factory.getUtility(ITDEF_INTF)
         apIntf = factory.getUtility(AP_INTF)
+        fiIntf = factory.getUtility(FI_INTF)
     }
 
     void close() {
