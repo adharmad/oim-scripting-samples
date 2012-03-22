@@ -6,10 +6,11 @@ include_class 'java.lang.System'
 include_class 'java.util.HashMap'
  
  
-login = 'TEST'
+login = 'HACKER'
  
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
+#xlclient.passwordLogin('xelsysadm', 'welcome1')
  
 usrMgr = xlclient.getUtility('usrmgr')
  
@@ -23,6 +24,7 @@ usrHash = {
     'Xellerate Type' => 'End-User',
     'act_key' => 1,
     'Common Name' => login
+    #'ENCUDF' => 'hahaha'
 }
  
 usrMap = HashMap.new(usrHash)

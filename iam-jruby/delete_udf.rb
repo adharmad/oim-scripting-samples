@@ -14,8 +14,15 @@ include_class 'oracle.iam.configservice.api.Constants'
  
 udf = ARGV[0]
 
+jndi = Hashtable.new({
+    'java.naming.provider.url' => 't3://adc2101221.us.oracle.com:7001/oim',
+    'java.naming.factory.initial' => 'weblogic.jndi.WLInitialContextFactory'
+})
+
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
+#xlclient.passwordLogin('test1', 'Welcome1')
+#xlclient.passwordLoginWithDiscovery('xelsysadm', 'Welcome1', jndi)
  
 cfgMgr = xlclient.getUtility('cfgmgr')
 

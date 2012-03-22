@@ -14,8 +14,15 @@ include_class 'java.io.FileReader'
  
 fileName = 'XXXX_child.xml'
 
+jndi = Hashtable.new({
+    'java.naming.provider.url' => 't3://10.178.92.85:8003/oim',
+    'java.naming.factory.initial' => 'weblogic.jndi.WLInitialContextFactory'
+})
+
 xlclient = XLAPIClient.new
-xlclient.defaultLogin
+#xlclient.defaultLogin
+xlclient.passwordLogin('xelsysadm', 'Welcome1')
+#xlclient.passwordLoginWithDiscovery('xelsysadm', 'Welcome1', jndi)
 
 impIntf = xlclient.getUtility('import')
 

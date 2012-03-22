@@ -12,12 +12,11 @@ include_class 'oracle.iam.platform.context.ContextManager'
  
  
 id = ARGV[0]
-#id = 'FOO003'
-objName = 'race'
+objName = 'R2'
  
 xlclient = XLAPIClient.new
-#xlclient.defaultLogin
-xlclient.passwordLogin('xelsysadm', 'Welcome1')
+xlclient.defaultLogin
+#xlclient.passwordLogin('xelsysadm', 'Welcome1')
 
 jobName = xlclient.getRandomString(6)
 jobID = rand(1000)
@@ -30,10 +29,12 @@ ContextManager.setValue("JOBNAME", ContextAwareString.new(jobName))
 reconIntf = xlclient.getUtility('reconsvc')
 
 reconHash = {
-    'id' => id,
-    'field' => id.to_s + '_fieldval'
-    #'status' => 'Disabled',
-    #'last' => id + '_last'
+    'itres' => '14',
+    'login' => id,
+    'first' => id.to_s + '_first',
+    'middle' => id.to_s + '_middle',
+    'last' => id.to_s + '_last',
+    'email' => id.to_s + '@oracle.com'
 }
 
 reconMap = HashMap.new(reconHash)

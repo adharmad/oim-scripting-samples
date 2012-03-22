@@ -6,8 +6,8 @@ include_class 'java.lang.System'
 include_class 'java.util.HashSet'
 
 
-roleKey = '29'
-userKey = '20017'
+roleKey = '22'
+userKey = '212'
 
 
 xlclient = XLAPIClient.new

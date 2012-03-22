@@ -14,7 +14,10 @@ schSvc = xlclient.getUtility('sch')
  
 t1 = System.currentTimeMillis
 schSvc.triggerNow(jobName)
-
+schSvc.triggerNow(jobName)
+schSvc.triggerNow(jobName)
+schSvc.triggerNow(jobName)
+schSvc.triggerNow(jobName)
 t2 = System.currentTimeMillis
  
 delta = t2-t1

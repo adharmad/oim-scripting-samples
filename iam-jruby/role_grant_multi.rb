@@ -6,32 +6,26 @@ include_class 'java.lang.System'
 include_class 'java.util.HashSet'
 
 
-roleKey = '29'
-beginUsrKey = 10017
-endUsrKey = 20016
+roleKey = '22'
+beginUsrKey = 111
+endUsrKey = 210
 
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
  
 roleMgr = xlclient.getUtility('rolemgr')
 
-fileName = 'prov2-timing.csv'
+userSet = HashSet.new
 
-File.open(fileName, 'w') do |f|  
-    for i in beginUsrKey..endUsrKey
-        userSet = HashSet.new
-        userSet.add(i.to_s)
-
-        t1 = System.currentTimeMillis
-        res = roleMgr.grantRole(roleKey, userSet)
-        id = res.getEntityId()
-        status = res.getStatus()
-        t2 = System.currentTimeMillis
-    
-        delta = t2-t1
-        f.puts "#{i} #{delta}"
-    end
+for i in beginUsrKey..endUsrKey
+    userSet.add(i.to_s)
 end
 
+res = roleMgr.grantRole(roleKey, userSet)
+id = res.getEntityId()
+status = res.getStatus()
+
+puts "granted role #{roleKey} to users with keys #{beginUsrKey} - #{endUsrKey}"
+    
 xlclient.logout 
 System.exit 0

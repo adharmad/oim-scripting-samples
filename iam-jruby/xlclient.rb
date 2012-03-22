@@ -210,34 +210,34 @@ class XLAPIClient
     end
 
     def getUsrKey(usrLogin)
-        usrIntf = getUtility('usr')
-        usrMap = HashMap.new({
-            'Users.User ID' => usrLogin
-        })
-        filterCols = ['Users.Key', 'Users.User ID'].to_java(:String)
-        rs = usrIntf.findUsersFiltered(usrMap, filterCols)
-        rs.goToRow(0)
-        rs.getLongValue('Users.Key')
+            usrIntf = getUtility('usr')
+            usrMap = HashMap.new({
+                'Users.User ID' => usrLogin
+            })
+            filterCols = ['Users.Key', 'Users.User ID'].to_java(:String)
+            rs = usrIntf.findUsersFiltered(usrMap, filterCols)
+            rs.goToRow(0)
+            rs.getLongValue('Users.Key')
     end
 
     def getObjKey(objName)
-        objIntf = getUtility('obj')
-        objMap = HashMap.new({
-            'Objects.Name' => objName
+            objIntf = getUtility('obj')
+            objMap = HashMap.new({
+                'Objects.Name' => objName
         })
-        rs = objIntf.findObjects(objMap)
-        rs.goToRow(0)
-        rs.getLongValue('Objects.Key')
+            rs = objIntf.findObjects(objMap)
+            rs.goToRow(0)
+            rs.getLongValue('Objects.Key')
     end
 
     def getGrpKey(grpName)
-        grpIntf = getUtility('grp')
-        grpMap = HashMap.new({
-            'Groups.Group Name' => grpName
-        })
-        rs = grpIntf.findGroups(grpMap)
-        rs.goToRow(0)
-        rs.getLongValue('Groups.Key')
+            grpIntf = getUtility('grp')
+            grpMap = HashMap.new({
+                'Groups.Group Name' => grpName
+            })
+            rs = grpIntf.findGroups(grpMap)
+            rs.goToRow(0)
+            rs.getLongValue('Groups.Key')
     end
 
     def getRandomString(sz)

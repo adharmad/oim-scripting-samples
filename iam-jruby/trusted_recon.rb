@@ -16,13 +16,19 @@ include_class 'oracle.iam.platform.context.ContextManager'
 objName = 'Xellerate User'
 #objName = 'AD User Trusted'
 id = 'TST003'
-change = '_modified'
+change = '_hadkardi'
 #id = ARGV[0]
 #change = ARGV[1]
  
+jndi = Hashtable.new({
+    'java.naming.provider.url' => 't3://adc2111036.us.oracle.com:7003/oim',
+    'java.naming.factory.initial' => 'weblogic.jndi.WLInitialContextFactory'
+})
 
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
+#xlclient.passwordLogin('xelsysadm', 'Welcome1')
+#xlclient.passwordLoginWithDiscovery('xelsysadm', 'Welcome1', jndi)
 
 jobName = xlclient.getRandomString(6)
 jobID = rand(1000)

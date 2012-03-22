@@ -15,6 +15,11 @@ include_class 'oracle.iam.platform.context.ContextManager'
 id = ARGV[0]
 objName = 'AD User'
 
+jndi = Hashtable.new({
+    'java.naming.provider.url' => 't3://10.178.92.85:8003/oim',
+    'java.naming.factory.initial' => 'weblogic.jndi.WLInitialContextFactory'
+})
+
 xlclient = XLAPIClient.new
 xlclient.passwordLoginWithDiscovery('xelsysadm', 'Welcome1', jndi)
 
@@ -33,7 +38,7 @@ reconHash = {
     'City' => 'SFO',
     'P.O.Box' => '1234',
     'Office' => 'HELLO',
-    'Organization Name' => '4~OU=testou,DC=parent,DC=com',
+    'Organization Name' => '4~OU=sandhya,DC=parent,DC=com',
     'Fax' => '123',
     'State' => '345',
     'Pager' => '213123',
@@ -41,7 +46,7 @@ reconHash = {
     'Zip' => '94118',
     'Middle Name' => 'xx',
     'UserPrincipalName' => id + '@',
-    'Email' => id + '@example.com',
+    'Email' => id + '@oracle.com',
     'Mobile' => 'asdasd',
     'objectGUID' => '1c15720e426bb84fae4098d5514d6085',
     'Telephone Number' => '123',
