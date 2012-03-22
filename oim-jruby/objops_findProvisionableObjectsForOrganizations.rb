@@ -7,21 +7,17 @@ include_class 'java.lang.System'
 include_class 'java.util.HashMap'
 include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
-
-ugpName = 'hukum'
-
+usr_key = 1
 
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
 
-grpIntf = xlclient.getUtility('grp')
+objIntf = xlclient.getUtility('obj')
 
-ugpKey = xlclient.getGrpKey(ugpName)
-puts "Group key = #{ugpKey}"
-
-#rs = grpIntf.getMemberUsers(ugpKey)
-rs = grpIntf.getAllMemberUsers(ugpKey)
+#rs = objIntf.findProvisionableObjectsForOrganizations([1].to_java :long)
+rs = objIntf.findProvisionableObjectsForOrganizations(([1].to_java :long), HashMap.new)
 xlclient.printRS(rs)
 
 xlclient.close
 System.exit 0
+

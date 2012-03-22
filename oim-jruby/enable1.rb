@@ -2,26 +2,24 @@ require 'java'
 require 'xlclient'
 
 include_class('java.lang.Exception') {|package,name| "J#{name}" }
-include_class('java.lang.String') {|package,name| "J#{name}" }
 include_class 'java.lang.System' 
 include_class 'java.util.HashMap'
 include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
-
-ugpName = 'hukum'
-
+usrKey = 111
+oiuKey = 118
 
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
 
-grpIntf = xlclient.getUtility('grp')
+usrIntf = xlclient.getUtility('usr')
 
-ugpKey = xlclient.getGrpKey(ugpName)
-puts "Group key = #{ugpKey}"
+t1 = System.currentTimeMillis
+usrIntf.enableAppForUser(usrKey, oiuKey)
+t2 = System.currentTimeMillis
 
-#rs = grpIntf.getMemberUsers(ugpKey)
-rs = grpIntf.getAllMemberUsers(ugpKey)
-xlclient.printRS(rs)
+delta = t2-t1
+puts "Enabled resource for user with key = #{usrKey} time = #{delta}"
 
 xlclient.close
 System.exit 0

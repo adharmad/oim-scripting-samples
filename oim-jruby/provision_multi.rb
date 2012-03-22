@@ -6,7 +6,7 @@ include_class 'java.lang.System'
 include_class 'java.util.HashMap'
 include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
-usrPrefix = 'TEST'
+usrPrefix = 'GOVERNMENT'
 objName = 'OID User'
 numUsers = 10
 

@@ -8,7 +8,7 @@ include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
 
 objName = 'GGGGGG'
-id = 'FOO'
+id = 'SIDERICA9'
 
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
@@ -17,7 +17,7 @@ reconIntf = xlclient.getUtility('recon')
 
 reconHash = {
     'id' => id,
-    'val' => 'hello_world'
+    'val' => 'uuuuuuuuuuuuuuuuu'
 }
 
 reconMap = HashMap.new(reconHash)

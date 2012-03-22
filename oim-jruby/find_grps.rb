@@ -9,8 +9,14 @@ include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
 
 xlclient = XLAPIClient.new
-xlclient.defaultLogin
+jndi = Hashtable.new({
+    'java.naming.provider.url' => 'jnp://dadvmn0695.us.oracle.com:1099',
+    'java.naming.factory.initial' => 'org.jnp.interfaces.NamingContextFactory'
+})
 
+#xlclient.defaultLogin
+#xlclient.signatureLogin('xelsysadm')
+xlclient.remoteLogin('xelsysadm', 'xelsysadm', jndi)
 
 grpIntf = xlclient.getUtility('grp')
 rs = grpIntf.findGroups(HashMap.new({}))

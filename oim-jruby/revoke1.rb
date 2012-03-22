@@ -2,26 +2,25 @@ require 'java'
 require 'xlclient'
 
 include_class('java.lang.Exception') {|package,name| "J#{name}" }
-include_class('java.lang.String') {|package,name| "J#{name}" }
 include_class 'java.lang.System' 
 include_class 'java.util.HashMap'
 include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
-
-ugpName = 'hukum'
-
+usrKey = 62
+#oiuKeys = [59, 60].to_java(:long)
+oiuKeys = [72].to_java(:long)
 
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
 
-grpIntf = xlclient.getUtility('grp')
+usrIntf = xlclient.getUtility('usr')
 
-ugpKey = xlclient.getGrpKey(ugpName)
-puts "Group key = #{ugpKey}"
+t1 = System.currentTimeMillis
+usrIntf.revokeObjects(usrKey, oiuKeys)
+t2 = System.currentTimeMillis
 
-#rs = grpIntf.getMemberUsers(ugpKey)
-rs = grpIntf.getAllMemberUsers(ugpKey)
-xlclient.printRS(rs)
+delta = t2-t1
+puts "Revoked resources for user with key = #{usrKey} time = #{delta}"
 
 xlclient.close
 System.exit 0

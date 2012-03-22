@@ -8,10 +8,17 @@ include_class 'java.util.Hashtable'
 include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
 usr_key = 932
-change = 'change_this'
+change = 'update_karde'
 
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
+
+jndi = Hashtable.new({
+    'java.naming.provider.url' => 'jnp://dadvmn0695.us.oracle.com:1099',
+    'java.naming.factory.initial' => 'org.jnp.interfaces.NamingContextFactory'
+})
+
+#xlclient.remoteLogin('xelsysadm', 'xelsysadm', jndi)
 
 usrIntf = xlclient.getUtility('usr')
 
@@ -26,8 +33,8 @@ updateMap = HashMap.new({
     'Users.First Name' => 'pp',
     'Users.Last Name' => 'qq',
     'Users.Middle Name' => 'rr'
-    'Users.Email' => change + '_email@example.com',
-    'Organizations.Key' => '100'
+    #'Users.Email' => change + '_email@oracle.com',
+    #'Organizations.Key' => '161'
     #'USR_UDF_REGULAR' => change + '_regular',
     #'USR_UDF_ENCRYPTED' => change + '_encrypted'
 })

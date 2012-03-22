@@ -38,5 +38,9 @@ rs = reconIntf.getMissingAccounts(objName, set)
 xlclient.printRS(rs)
 
 
+
+
+
+
 xlclient.close
 System.exit 0

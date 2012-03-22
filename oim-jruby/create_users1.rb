@@ -6,27 +6,16 @@ include_class 'java.lang.System'
 include_class 'java.util.HashMap'
 include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
-#numUsers = 1
-#prefix = 'asdsdasd'
 
-prefix = ARGV[0]
-numUsers = ARGV[1].to_i
+numUsers = 10
+prefix = 'eee'
 
-puts "prefix = #{prefix}"
-
-xlclient = XLAPIClient.new
-xlclient.defaultLogin
-
-#jndi = Hashtable.new({
-#    'java.naming.provider.url' => 'jnp://dadvmn0695.us.oracle.com:1099',
-#    'java.naming.factory.initial' => 'org.jnp.interfaces.NamingContextFactory'
-#})
-
-#xlclient.remoteLogin(jndi, 'xelsysadm', 'xelsysadm')
-
-usrIntf = xlclient.getUtility('usr')
 
 for i in (1..numUsers)
+    xlclient = XLAPIClient.new
+    xlclient.defaultLogin
+    usrIntf = xlclient.getUtility('usr')
+
     usrHash = {
         'Users.User ID' => prefix + i.to_s,
         'Users.First Name' => prefix + 'First' + i.to_s,
@@ -42,11 +31,12 @@ for i in (1..numUsers)
 
     t1 = System.currentTimeMillis
     usrKey = usrIntf.createUser(usrMap)
-    t2 = System.currentTimeMillis
+	t2 = System.currentTimeMillis
 
     delta = t2-t1
     puts "Created user with key = #{usrKey} time = #{delta}"
+    xlclient.close
 end
 
-xlclient.close
+
 System.exit 0

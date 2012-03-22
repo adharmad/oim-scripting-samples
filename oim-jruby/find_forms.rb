@@ -3,21 +3,26 @@ require 'xlclient'
 
 include_class('java.lang.Exception') {|package,name| "J#{name}" }
 include_class 'java.lang.System' 
+include_class 'java.lang.Thread' 
 include_class 'java.util.HashMap'
+include_class 'java.util.Hashtable'
 include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
-
 
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
 
-lookupIntf = xlclient.getUtility('lookup')
+fdIntf = xlclient.getUtility('fd')
 
-t1 = System.currentTimeMillis
-lookupIntf.updateLookupValue('Lookup.ORM.Intg', 'haha', 'haha_new', '123updated', 'en', 'US')
-t2 = System.currentTimeMillis
+formHash = {
+  'Structure Utility.Table Name' => 'UD_XXXX'
+}
 
-delta = t2-t1
-puts "Updatd lookup value"
+formMap = HashMap.new(formHash)
+
+
+rs = fdIntf.findForms(formMap)
+
+xlclient.printRS(rs)
 
 xlclient.close
 System.exit 0

@@ -7,9 +7,9 @@ include_class 'java.util.HashMap'
 include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
 
-objName = 'testobj'
-id = 'TST1'
-change = 'changeit'
+objName = 'xdell'
+id = 'IRAQ002'
+change = 'JOCK'
 
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
@@ -35,7 +35,7 @@ childHash = {
 }
 
 childMap = HashMap.new(childHash)
-reconIntf.addMultiAttributeData(rceKey, 'datac1', childMap)
+reconIntf.addMultiAttributeData(rceKey, 'dellc1', childMap)
 
 #reconIntf.providingAllMultiAttributeData(rceKey, 'dellc2', true)
 # first child table entry
@@ -45,7 +45,7 @@ childHash = {
 }
 
 childMap = HashMap.new(childHash)
-reconIntf.addMultiAttributeData(rceKey, 'datac2', childMap)
+reconIntf.addMultiAttributeData(rceKey, 'dellc2', childMap)
 
 
 reconIntf.finishReconciliationEvent(rceKey)

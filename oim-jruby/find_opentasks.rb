@@ -8,19 +8,12 @@ include_class 'java.util.HashMap'
 include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
 
-ugpName = 'hukum'
-
-
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
 
-grpIntf = xlclient.getUtility('grp')
+provIntf = xlclient.getUtility('prov')
 
-ugpKey = xlclient.getGrpKey(ugpName)
-puts "Group key = #{ugpKey}"
-
-#rs = grpIntf.getMemberUsers(ugpKey)
-rs = grpIntf.getAllMemberUsers(ugpKey)
+rs = provIntf.findAllOpenProvisioningTasks(HashMap.new, ([].to_java :String))
 xlclient.printRS(rs)
 
 xlclient.close

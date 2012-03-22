@@ -9,7 +9,13 @@ include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
 
 xlclient = XLAPIClient.new
-xlclient.defaultLogin
+
+jndi = Hashtable.new({
+    'java.naming.provider.url' => 'ormi://dadvmn0695.us.oracle.com:23791/Xellerate',
+    'java.naming.factory.initial' => 'oracle.j2ee.rmi.RMIInitialContextFactory'
+})
+
+xlclient.passwordLoginWithDiscovery(jndi, 'xelsysadm', 'xelsysadm')
 
 itinst = xlclient.getUtility('itinst')
 

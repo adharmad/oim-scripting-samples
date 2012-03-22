@@ -8,7 +8,7 @@ include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
 
 numUsers = 200
-prefix = 'magnus'
+prefix = 'carlsen'
 objName = 'Xellerate User'
 
 xlclient = XLAPIClient.new

@@ -9,7 +9,8 @@ include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
 
 xlclient = XLAPIClient.new
-xlclient.defaultLogin
+#xlclient.defaultLogin
+xlclient.passwordLogin('adharmad', 'foo')
 
 itinst = xlclient.getUtility('itinst')
 

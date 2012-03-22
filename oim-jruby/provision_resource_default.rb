@@ -2,26 +2,27 @@ require 'java'
 require 'xlclient'
 
 include_class('java.lang.Exception') {|package,name| "J#{name}" }
-include_class('java.lang.String') {|package,name| "J#{name}" }
 include_class 'java.lang.System' 
 include_class 'java.util.HashMap'
 include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
 
-ugpName = 'hukum'
-
-
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
+usrIntf = xlclient.getUtility('usr')
 
-grpIntf = xlclient.getUtility('grp')
 
-ugpKey = xlclient.getGrpKey(ugpName)
-puts "Group key = #{ugpKey}"
+usrLogin = 'DDD4'
+objName = 'helpdesk'
 
-#rs = grpIntf.getMemberUsers(ugpKey)
-rs = grpIntf.getAllMemberUsers(ugpKey)
-xlclient.printRS(rs)
+usrKey = xlclient.getUsrKey(usrLogin)
+objKey = xlclient.getObjKey(objName)
+
+puts "usrKey = #{usrKey}"
+puts "objKey = #{objKey}"
+
+oiuKey = usrIntf.provisionObject(usrKey, objKey)
+puts "oiuKey = #{oiuKey}"
 
 xlclient.close
 System.exit 0

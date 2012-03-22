@@ -12,7 +12,17 @@ include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 login = ARGV[0]
 
 xlclient = XLAPIClient.new
-xlclient.defaultLogin
+#xlclient.defaultLogin
+#jndi = Hashtable.new({
+#    'java.naming.provider.url' => 'ormi://dadvmn0695.us.oracle.com:23791/Xellerate',
+#    'java.naming.factory.initial' => 'oracle.j2ee.rmi.RMIInitialContextFactory'
+#})
+
+
+#xlclient.defaultLogin
+xlclient.passwordLogin('bigadmin', 'foo')
+#xlclient.signatureLogin('xelsysadm')
+#xlclient.remoteLogin('xelsysadm', 'xelsysadm', jndi)
 
 usrIntf = xlclient.getUtility('usr')
 
@@ -25,6 +35,8 @@ usrHash = {
   'Users.Role' => 'Full-Time',
   'Users.Xellerate Type' => 'End-User',
   'Organizations.Key' => '1'
+  #'USR_UDF_CWFUDF1' => 'hello',
+  #'USR_UDF_CWFUDF2' => 'world'
 }
 
 usrMap = HashMap.new(usrHash)

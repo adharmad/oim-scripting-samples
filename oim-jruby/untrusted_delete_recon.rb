@@ -8,7 +8,7 @@ include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
 
 objName = 'GGGGGG'
-id = 'FOO'
+id = 'SIDERICA5'
 
 xlclient = XLAPIClient.new
 xlclient.defaultLogin

@@ -24,28 +24,28 @@ class Worker < JThread
     def run
         puts "Running #{@tid}"
         usrIntf = @xlclient.getUtility('usr')
-	    filter = ['Users.Key', 'Users.User ID', 
+	filter = ['Users.Key', 'Users.User ID', 
 	    'Users.Row Version'].to_java(:String)
 
-	    for usr_key in (@begusr..@endusr)
-	        usrMap = HashMap.new({
-		    'Users.Key' => usr_key.to_s
-	        })
+	for usr_key in (@begusr..@endusr)
+	    usrMap = HashMap.new({
+		'Users.Key' => usr_key.to_s
+	    })
 
-	        rs = usrIntf.findUsersFiltered(usrMap, filter)
-	        userID = rs.getStringValue('Users.User ID')
+	    rs = usrIntf.findUsersFiltered(usrMap, filter)
+	    userID = rs.getStringValue('Users.User ID')
 
-	        updateMap = HashMap.new({
-		        'Users.First Name' => userID + '555',
-		        'Users.Last Name' => userID + '666'
-	        })
+	    updateMap = HashMap.new({
+		'Users.First Name' => userID + '555',
+		'Users.Last Name' => userID + '666'
+	    })
 
-	        t1 = System.currentTimeMillis
-	        usrIntf.updateUser(rs, updateMap)
-	        t2 = System.currentTimeMillis
-	        delta = t2-t1
-	        puts "Thread #{@tid} updated user with key = #{usr_key} time = #{delta}"
-	    end
+	    t1 = System.currentTimeMillis
+	    usrIntf.updateUser(rs, updateMap)
+	    t2 = System.currentTimeMillis
+	    delta = t2-t1
+	    puts "Thread #{@tid} updated user with key = #{usr_key} time = #{delta}"
+	end
     end
 end
 

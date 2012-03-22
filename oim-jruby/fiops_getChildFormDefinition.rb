@@ -2,26 +2,22 @@ require 'java'
 require 'xlclient'
 
 include_class('java.lang.Exception') {|package,name| "J#{name}" }
-include_class('java.lang.String') {|package,name| "J#{name}" }
 include_class 'java.lang.System' 
 include_class 'java.util.HashMap'
 include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
 
-ugpName = 'hukum'
-
+sdkKey = 2261
+sdkVersion = 1
 
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
 
-grpIntf = xlclient.getUtility('grp')
+fiIntf = xlclient.getUtility('fi')
+rs = fiIntf.getChildFormDefinition(sdkKey, sdkVersion)
 
-ugpKey = xlclient.getGrpKey(ugpName)
-puts "Group key = #{ugpKey}"
-
-#rs = grpIntf.getMemberUsers(ugpKey)
-rs = grpIntf.getAllMemberUsers(ugpKey)
 xlclient.printRS(rs)
 
 xlclient.close
 System.exit 0
+
