@@ -7,7 +7,7 @@ include_class 'java.util.HashMap'
 
 xlclient = XLAPIClient.new
 #xlclient.defaultLogin
-xlclient.passwordLogin('adharmad', 'Password1')
+xlclient.passwordLogin('xelsysadm', 'password')
 
 itinst = xlclient.getUtility('itinst')
 

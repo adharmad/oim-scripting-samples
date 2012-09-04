@@ -6,10 +6,10 @@ include_class 'java.lang.System'
 include_class 'java.util.HashMap'
 include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
-usrPrefix = 'REST'
+usrPrefix = 'GRUMPY'
 idxBegin = 16
 idxEnd = 10015
-objName = 'dummy1'
+objName = 'SIMRES'
 
 xlclient = XLAPIClient.new
 xlclient.defaultLogin

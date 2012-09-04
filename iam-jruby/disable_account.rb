@@ -7,7 +7,8 @@ include_class 'java.util.HashMap'
 include_class 'java.util.Hashtable'
 include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
-sid = ARGV[0]
+usrLogin = ARGV[0]
+oiuKey = ARGV[1].to_i
 
 jndi = Hashtable.new({
     'java.naming.provider.url' => 't3://host:port/oim',
@@ -15,15 +16,20 @@ jndi = Hashtable.new({
 })
 
 xlclient = XLAPIClient.new
-#xlclient.defaultLogin
-xlclient.passwordLoginWithDiscovery('xelsysadm', 'password', jndi)
+xlclient.defaultLogin
+#xlclient.passwordLoginWithDiscovery('xelsysadm', 'password', jndi)
 
-dcIntf = xlclient.getIntf('dc')
+usrIntf = xlclient.getIntf('usr')
 
-dcIntf.finalizeDataCollectionSession(sid)
-        
-puts "Finalized data collection"
+usrKey = xlclient.getUsrKey(usrLogin)
+
+
+t1 = System.currentTimeMillis
+oiuKey = usrIntf.disableAppForUser(usrKey, oiuKey)
+t2 = System.currentTimeMillis
+
+delta = t2-t1
+puts "Disabled account for user with key = #{usrKey} resource oiu_key = #{oiuKey} time = #{delta}"
 
 xlclient.logout
 System.exit 0
-

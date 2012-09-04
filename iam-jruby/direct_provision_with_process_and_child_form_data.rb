@@ -8,10 +8,10 @@ include_class 'java.util.Hashtable'
 include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
 usrLogin = ARGV[0]
-objName = 'oiares'
+objName = 'SIMRES'
 
-parentFormName = 'UD_PARENT'
-childForms = ['UD_CHILD']
+parentFormName = 'UD_SIMRESP'
+childForms = ['UD_SIMRESC1', 'UD_SIMRESC2']
 
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
@@ -54,11 +54,21 @@ fiIntf.setProcessFormData(orcKey, udMap)
 for cForm in childForms
     cFormKey = xlclient.getFormKey(cForm)
     
+    if cForm == 'UD_SIMRESC1' 
+    
     udChildMap = HashMap.new({
-        cForm + '_VAR1' => usrLogin + '_' + cForm + '_var1',
-        cForm + '_VAR2' => usrLogin + '_' + cForm + '_var2',
-        cForm + '_VARNUM' => '1'
+            cForm + '_GROUP' => '5~Finance',
+            cForm + '_APPLICATION' => 'Finance Application'
+        })
+
+    elsif cForm == 'UD_SIMRESC2'
+
+        udChildMap = HashMap.new({
+            cForm + '_ENTITLEMENT' => '5~General Ledger',
+            cForm + '_ENTDESC' => 'General Ledger description'
     })
+
+    end
 
     fiIntf.addProcessFormChildData(cFormKey, orcKey, udChildMap)
 end

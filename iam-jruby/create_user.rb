@@ -10,7 +10,7 @@ include_class 'java.util.Hashtable'
 login = ARGV[0]
 
 jndi = Hashtable.new({
-    'java.naming.provider.url' => 't3://adc2101221.us.oracle.com:7001/oim',
+    'java.naming.provider.url' => 't3://host:port/oim',
     'java.naming.factory.initial' => 'weblogic.jndi.WLInitialContextFactory'
 })
 

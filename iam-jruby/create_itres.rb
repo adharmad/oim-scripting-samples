@@ -7,45 +7,38 @@ include_class 'java.util.HashMap'
 include_class 'java.util.Hashtable'
 include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
-numITRes = 5
-prefix = 'r2_itres'
-itDefName = 'R2Type'
+itresName = 'foo1'
+itDefName = 'fooType'
 
 jndi = Hashtable.new({
-    'java.naming.provider.url' => 't3://dadvmn0540.us.oracle.com:7003/oim',
+    'java.naming.provider.url' => 't3://adc2201822.us.oracle.com:8003/oim',
     'java.naming.factory.initial' => 'weblogic.jndi.WLInitialContextFactory'
 })
 
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
-#xlclient.passwordLogin('xelsysadm', 'Welcome1')
-#xlclient.passwordLoginWithDiscovery('xelsysadm', 'Welcome1', jndi)
+#xlclient.passwordLogin('test1', 'password')
+#xlclient.passwordLoginWithDiscovery('xelsysadm', 'password', jndi)
+ 
 
 itInstIntf = xlclient.getUtility('itinst')
 itDefIntf = xlclient.getUtility('itdef')
 
 itDefKey = xlclient.getITResDefKey(itDefName)
 
-for i in (1..numITRes)
-    itresData = {
-        'IT Resources Type Definition.Key' => itDefKey.to_s,
-        'IT Resources.Name' => prefix + '_' + i.to_s,
-        'a' => 'aaa' + '_' + prefix + '_' + i.to_s,
-        'b' => 'bbb' + '_' + prefix + '_' + i.to_s
-        #'pp' => 'ppp' + '_' + prefix + '_' + i.to_s,
-        #'qq' => 'qqq' + '_' + prefix + '_' + i.to_s,
-        #'rr' => 'rrr' + '_' + prefix + '_' + i.to_s
-    }
 
-    itresMap = HashMap.new(itresData)
+itresData = {
+    'IT Resources Type Definition.Key' => itDefKey.to_s,
+    'IT Resources.Name' => itresName,
+    'a' => 'aaa' + '_' + itresName,
+    'b' => 'bbb' + '_' + itresName
+}
 
-    t1 = System.currentTimeMillis
-    itresKey = itInstIntf.createITResourceInstance(itresMap)
-    t2 = System.currentTimeMillis
+itresMap = HashMap.new(itresData)
 
-    delta = t2-t1
-    puts "Created itresourcee with key = #{itresKey} time = #{delta}"
-end
+itresKey = itInstIntf.createITResourceInstance(itresMap)
+
+puts "Created itresourcee with key = #{itresKey}"
 
 xlclient.logout
 System.exit 0

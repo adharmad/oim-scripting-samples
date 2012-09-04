@@ -19,7 +19,7 @@ jndi = Hashtable.new({
 
 xlclient = XLAPIClient.new
 #xlclient.defaultLogin
-xlclient.passwordLoginWithDiscovery('xelsysadm', 'Welcome1', jndi)
+xlclient.passwordLoginWithDiscovery('xelsysadm', 'password', jndi)
 
 dcIntf = xlclient.getIntf('dc')
 
@@ -31,23 +31,8 @@ dcHash = {
     #'User' => nil
     #'User' => c.getTime
     #'Entitlement' => nil,
-    #'Entitlement' => c.getTime
-    #'OIA1' => c.getTime
-    #'OIA1' => nil,
-    #'oiares' => nil,
-    #'XXXX' => c.getTime
-    #'bad ro' => nil
-    #'oiares' => nil,
-    #'RO3' => nil,
-    #'rox' => nil
-    #'User' => nil
-    #'AD User' => nil
-    #'eBusiness Suite User' => nil,
-    #'Oracle DB User' => nil
+    #'SIMRES' => nil,
     #'RoleMembership' => nil
-    'ResSimplePar' => nil,
-    'ResParentSingleChild' => nil,
-    'respscme' => nil
 }
 
 dcMap = HashMap.new(dcHash)

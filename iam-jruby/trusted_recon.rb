@@ -16,7 +16,7 @@ include_class 'oracle.iam.platform.context.ContextManager'
 objName = 'Xellerate User'
 #objName = 'AD User Trusted'
 id = 'TST003'
-change = '_hadkardi'
+change = '_changethis'
 #id = ARGV[0]
 #change = ARGV[1]
  
@@ -41,9 +41,11 @@ reconIntf = xlclient.getUtility('reconsvc')
 
 reconHash = {
     'login' => id,
-    'first' => id + '_Fisrt' + change,
+    'first' => id + '_First' + change,
     'middle' => id + '_Middle' + change,
     'last' => id + '_Last' + change,
+    'regular' => id + '_reg' + change,
+    'encrypted' => 'foo',
     #'role' => 'Full-Time',
     #'xltype' => 'End-User',
     #'org' => 'Xellerate Users',

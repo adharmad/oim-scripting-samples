@@ -22,7 +22,7 @@ for i in (1..count)
     org.setAttribute('Organization Status', 'Active')
 
     t1 = System.currentTimeMillis
-    orgKey = orgMgr.createOrganization(org)
+    orgKey = orgMgr.create(org)
     t2 = System.currentTimeMillis
  
     delta = t2-t1

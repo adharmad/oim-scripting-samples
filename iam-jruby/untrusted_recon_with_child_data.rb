@@ -4,6 +4,7 @@ require 'xlclient'
 include_class('java.lang.Exception') {|package,name| "J#{name}" }
 include_class 'java.lang.System'
 include_class 'java.util.HashMap'
+include_class 'java.util.Hashtable'
 
 include_class 'oracle.iam.platform.context.ContextAwareNumber'
 include_class 'oracle.iam.platform.context.ContextAwareString'
@@ -12,13 +13,16 @@ include_class 'oracle.iam.platform.context.ContextManager'
  
  
 id = ARGV[0]
-#id = 'FOO003'
-objName = 'res2'
-#objName = 'RRRR'
+objName = 'testrecon'
+ 
+jndi = Hashtable.new({
+    'java.naming.provider.url' => 't3://host:port/oim',
+    'java.naming.factory.initial' => 'weblogic.jndi.WLInitialContextFactory'
+})
  
 xlclient = XLAPIClient.new
 #xlclient.defaultLogin
-xlclient.passwordLogin('xelsysadm', 'Welcome1')
+xlclient.passwordLogin('xelsysadm', 'password')
 
 jobName = xlclient.getRandomString(6)
 jobID = rand(1000)
@@ -31,10 +35,9 @@ ContextManager.setValue("JOBNAME", ContextAwareString.new(jobName))
 reconIntf = xlclient.getUtility('reconsvc')
 
 reconHash = {
-    'uid' => id,
-    'f1' => 'updated_via_recon'
-    #'status' => 'Disabled',
-    #'last' => id + '_last'
+    'itres' => '5',
+    'login' => id,
+    'age' => id.to_s + 'modified'
 }
 
 reconMap = HashMap.new(reconHash)
@@ -44,21 +47,21 @@ rceKey = reconIntf.createReconciliationEvent(objName, reconMap, false)
 
 # first child table entry
 childHash = {
-    'ent1' => 'a',
-    'ent2' => 'a_via_recon'
+    'entname' => '5~ron',
+    'entdesc' => 'testronb'
 }
 
 childMap = HashMap.new(childHash)
-reconIntf.addMultiAttributeData(rceKey, 'child', childMap)
+reconIntf.addMultiAttributeData(rceKey, 'recchld', childMap)
 
 # second child table entry
 childHash = {
-    'ent1' => 'b',
-    'ent2' => 'b_via_recon'
+    'entname' => '5~harry',
+    'entdesc' => 'helloharry'
 }
 
 childMap = HashMap.new(childHash)
-reconIntf.addMultiAttributeData(rceKey, 'child', childMap)
+reconIntf.addMultiAttributeData(rceKey, 'recchld', childMap)
 
 reconIntf.finishReconciliationEvent(rceKey)
 

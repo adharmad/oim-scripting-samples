@@ -7,12 +7,12 @@ include_class 'java.util.HashMap'
 include_class 'java.util.Hashtable'
 include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 
-usrPrefix = 'CAVERY'
+usrPrefix = 'KODAK'
 count = 10
-objName = 'ro3'
+objName = 'SIMRES'
 
-parentFormName = 'UD_RO3'
-childForms = ['UD_RO3C', 'UD_ANOTCHLD']
+parentFormName = 'UD_SIMRESP'
+childForms = ['UD_SIMRESC1', 'UD_SIMRESC2']
 
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
@@ -45,11 +45,9 @@ for idx in (1..count)
 
     # set process form data
     udHash = {
-        parentFormName + '_SERVER' => '48',
-        parentFormName + '_F1' => usrLogin + '_test_data_id_1',
-        parentFormName + '_F2' => usrLogin + '_test_data_id_2',
-        parentFormName + '_F3' => usrLogin + '_test_data_id_3',
-        parentFormName + '_F4' => usrLogin + '_test_data_id_4',
+        parentFormName + '_ITRES' => '24',
+        parentFormName + '_F1' => usrLogin + '_test_data_hello',
+        parentFormName + '_F2' => usrLogin + '_another_test_data_hello'
     }
 
     udMap = HashMap.new(udHash)
@@ -59,54 +57,25 @@ for idx in (1..count)
     for cForm in childForms
         cFormKey = xlclient.getFormKey(cForm)
 
-        case cForm 
-        when 'UD_RO3C'
+        if cForm == 'UD_SIMRESC1' 
        
-            # first child table entry
             udChildMap = HashMap.new({
-                cForm + '_F1' => '22~code1',
-                cForm + '_F2' => 'just some desc 1'
+            cForm + '_GROUP' => '5~Finance',
+            cForm + '_APPLICATION' => 'Finance Application'
             })
 
-            fiIntf.addProcessFormChildData(cFormKey, orcKey, udChildMap)
+        elsif cForm == 'UD_SIMRESC2'
 
-            # second child table entry
             udChildMap = HashMap.new({
-                cForm + '_F1' => '23~code4',
-                cForm + '_F2' => 'just some desc 2'
+            cForm + '_ENTITLEMENT' => '5~General Ledger',
+            cForm + '_ENTDESC' => 'General Ledger description'
             })
-
-            fiIntf.addProcessFormChildData(cFormKey, orcKey, udChildMap)
-        
-            # third child table entry
-            udChildMap = HashMap.new({
-                cForm + '_F1' => '26~code8',
-                cForm + '_F2' => 'just some desc 3'
-            })
-
-            fiIntf.addProcessFormChildData(cFormKey, orcKey, udChildMap)
-        when 'UD_ANOTCHLD'
-
-            # first child table entry
-            udChildMap = HashMap.new({
-                cForm + '_ENT' => '22~code1',
-                cForm + '_FOO' => 'just some desc 1'
-            })
-
-            fiIntf.addProcessFormChildData(cFormKey, orcKey, udChildMap)
-
-            # second child table entry
-            udChildMap = HashMap.new({
-                cForm + '_ENT' => '23~code4',
-                cForm + '_FOO' => 'just some desc 2'
-            })
-
-            fiIntf.addProcessFormChildData(cFormKey, orcKey, udChildMap)
-
 
         end
-    end
 
+            fiIntf.addProcessFormChildData(cFormKey, orcKey, udChildMap)
+
+        end
 
     t2 = System.currentTimeMillis
 

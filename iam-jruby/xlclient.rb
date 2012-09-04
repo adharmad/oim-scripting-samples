@@ -53,7 +53,12 @@ include_class 'oracle.iam.reconciliation.api.EventMgmtService'
 include_class 'oracle.iam.scheduler.api.SchedulerService'
 include_class 'oracle.iam.accesspolicy.api.AccessPolicyService'
 include_class 'oracle.iam.configservice.api.ConfigManager'
+#include_class 'oracle.iam.platform.authopss.api.EntityPublicationService'
+#include_class 'oracle.iam.platformservice.api.EntityPublicationService'
+#include_class 'oracle.iam.provisioning.api.ApplicationInstanceService'
 #include_class 'oracle.iam.request.api.UnauthenticatedSelfService'
+#include_class 'oracle.iam.provisioning.api.ProvisioningService'
+#include_class 'oracle.iam.provisioning.api.ProvisioningServiceInternal'
 
 class XLAPIClient
     attr_accessor :oimclient, :factory, :jndi
@@ -90,7 +95,11 @@ class XLAPIClient
             'dc' => DataCollectionOperationsIntf.java_class,
             'prop' => OIMtcPropertyOperationsIntf.java_class,
             'cfgmgr' => ConfigManager.java_class
+            #'eps' => EntityPublicationService.java_class,
+            #'aisvc' => ApplicationInstanceService.java_class,
             #'unauthselfsvc' => UnauthenticatedSelfService.java_class
+            #'provsvc' => ProvisioningService.java_class,
+            #'provint' => ProvisioningServiceInternal.java_class
         }
     end
 
@@ -195,6 +204,11 @@ class XLAPIClient
             puts "COUNT = #{rs.getRowCount}\n\n"
             cols = rs.getColumnNames
 
+            for col in cols
+                puts "#{col}"
+            end
+            puts "--------------------------------------"
+
             for i in (0..rs.getRowCount-1)
                 rs.goToRow i
 
@@ -203,6 +217,8 @@ class XLAPIClient
                         puts "#{cols[j]}\t\t: #{rs.getStringValue(cols[j])}"
                     end
                 end
+
+                puts "--------------------------------------"
             end
         rescue JException => ex
             puts "Java Exception #{ex.message}"
@@ -261,6 +277,18 @@ class XLAPIClient
         rs.goToRow(0)
         rs.getLongValue('IT Resources Type Definition.Key')
     end
+
+    def getITResInstKey(itResInstName)
+        itinst = getUtility('itinst')
+        itMap = HashMap.new({
+            'IT Resources.Name' => itResInstName
+        })
+        rs = itinst.findITResourceInstances(itMap)
+
+        rs.goToRow(0)
+        rs.getLongValue('IT Resources.Key')
+    end
+
 
     def getFormKey(formName)
         fdintf = getUtility('fd')

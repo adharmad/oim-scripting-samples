@@ -5,7 +5,7 @@ include_class('java.lang.Exception') {|package,name| "J#{name}" }
 include_class 'java.lang.System'
  
  
-jobName = 'Foo'
+jobName = 'Catalog Synchronization Job'
  
 xlclient = XLAPIClient.new
 xlclient.passwordLogin('xelsysadm', 'Welcome1')

@@ -12,7 +12,7 @@ include_class 'oracle.iam.platform.context.ContextManager'
  
  
 id = ARGV[0]
-objName = 'delrecon'
+objName = 'res3'
  
 xlclient = XLAPIClient.new
 xlclient.passwordLogin('xelsysadm', 'Welcome1')
@@ -28,7 +28,7 @@ reconIntf = xlclient.getUtility('reconsvc')
 
 reconHash = {
     'uid' => id,
-    'haha' => 'test123'
+    'login' => 'test123'
 }
 
 reconMap = HashMap.new(reconHash)
