@@ -17,8 +17,11 @@ println "ITRes definition key = ${itDefKey}"
 def itResMap = [
     'IT Resources Type Definition.Key' : itDefKey.toString(),
     'IT Resources.Name' : itResName,
-    'test1' : 'foo' + itResName,
-    'test2' : 'boo' + itResName
+    'server' : itResName + '_server',
+    'login' : itResName + '_login',
+    'host' : '127.0.0.1',
+    'port' : '9999'
+
 ]
 
 def itResKey = itInstIntf.createITResourceInstance(itResMap)
