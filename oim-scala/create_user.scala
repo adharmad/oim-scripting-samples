@@ -11,6 +11,7 @@ object CreateUser {
 
         val login: String = args(0)
 
+        // create a user
         val factory = getFactory("xelsysadm", "xelsysadm")
         val usrIntf = getInterface(factory, "usr").asInstanceOf[tcUserOperationsIntf]
 

@@ -33,5 +33,5 @@ class OIMUser:
         t2 = System.currentTimeMillis()
 
         delta = t2-t1
-        print 'Created user with key = ', str(usrKey)
+        print 'Created user with login = ', str(self.userID), ' key = ', str(usrKey), ' time = ', str(delta)
         return usrKey

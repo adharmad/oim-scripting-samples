@@ -4,7 +4,7 @@ from user import *
 import sys
 
 if __name__ == '__main__':
-    userID = 'rocket_singh'
+    userID = 'wbuffet'
     xlclient = XLAPIClient('xelsysadm', 'xelsysadm')
     oimUser = OIMUser(xlclient)
     oimUser.init(userID)
