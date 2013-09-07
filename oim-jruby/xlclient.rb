@@ -73,6 +73,7 @@ class XLAPIClient
     def passwordLogin(userID, password)
         begin
             puts 'Logging in'
+            puts @jndi.to_s
             @factory = OIMtcUtilityFactory.new(@jndi, userID, password)
         rescue Exception => ex
             puts "Java Exception #{ex.message}"
