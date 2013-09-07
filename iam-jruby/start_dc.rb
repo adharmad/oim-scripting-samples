@@ -13,7 +13,7 @@ include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
 sid = ARGV[0]
 
 jndi = Hashtable.new({
-    'java.naming.provider.url' => 't3://adc2101163.us.oracle.com:14000/oim',
+    'java.naming.provider.url' => 't3://host:port/oim',
     'java.naming.factory.initial' => 'weblogic.jndi.WLInitialContextFactory'
 })
 

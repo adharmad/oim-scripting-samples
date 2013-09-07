@@ -31,7 +31,17 @@ usrHash = {
     'Xellerate Type' => 'End-User',
     'act_key' => 1,
     'Common Name' => login,
-    'Email' => login + '@oracle.com'
+    'Email' => login + '@oracle.com',
+    'Title' => 'Engineer',
+    'Home Phone' => '123-456-7890',
+    'Fax' => '098-765-4321'
+    #'usr_locale' => 'German'
+    #'regular' => login + '_regular',
+    #'encrypted' => login + '_encrypted'
+    #'Business Segment' => 'segment1',
+    #'Location Code' => 'location1'
+    #'test1' => login + '_test',
+    #'custom1' => login + '_custom'
 }
  
 usrMap = HashMap.new(usrHash)

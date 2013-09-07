@@ -1,14 +1,13 @@
 require 'java'
 require 'xlclient'
-
+ 
 include_class('java.lang.Exception') {|package,name| "J#{name}" }
-include_class 'java.lang.System' 
+include_class 'java.lang.System'
 include_class 'java.util.HashMap'
 include_class 'java.util.Hashtable'
-include_class('Thor.API.tcUtilityFactory') {|package,name| "OIM#{name}"}
-
-usrLogin = ARGV[0]
-objName = ARGV[1]
+ 
+ 
+login = ARGV[0]
 
 jndi = Hashtable.new({
     'java.naming.provider.url' => 't3://host:port/oim',
@@ -17,20 +16,24 @@ jndi = Hashtable.new({
 
 xlclient = XLAPIClient.new
 xlclient.defaultLogin
+#xlclient.passwordLogin('xelsysadm', 'Welcome1')
 #xlclient.passwordLoginWithDiscovery('xelsysadm', 'Welcome1', jndi)
 
-usrIntf = xlclient.getIntf('usr')
-
-usrKey = xlclient.getUsrKey(usrLogin)
-objKey = xlclient.getObjKey(objName)
-
-
+lookupIntf = xlclient.getIntf('lookup')
+ 
 t1 = System.currentTimeMillis
-oiuKey = usrIntf.provisionObject(usrKey, objKey)
-t2 = System.currentTimeMillis
+rs = lookupIntf.getLookupValues('Lookup.blahchild.ent')
+#xlclient.printRS(rs)
 
+for i in 0..(rs.getRowCount-1)
+    rs.goToRow(i)
+    puts rs.getStringValue('Lookup Definition.Lookup Code Information.Code Key') + ' => ' + rs.getStringValue('Lookup Definition.Lookup Code Information.Decode')
+end
+
+t2 = System.currentTimeMillis
+ 
 delta = t2-t1
-puts "Provisioned user with key = #{usrKey} resource oiu_key = #{oiuKey} time = #{delta}"
+puts "Got lookup values time=#{delta}"
 
 xlclient.logout
 System.exit 0

@@ -41,8 +41,13 @@ end
 
 # set process form data
 udHash = {
-    parentFormName + '_ITRES' => '5',
-    parentFormName + '_LOGIN' => usrLogin
+    parentFormName + '_ITRES' => '4',
+    parentFormName + '_FIRST' => usrLogin + '_First',
+    parentFormName + '_LAST' => usrLogin + '_Last',
+    parentFormName + '_MIDDLE' => usrLogin + '_Middle',
+    parentFormName + '_EMAIL' => usrLogin + '@oracle.com',
+    parentFormName + '_TELEPHONE' => '111-111-1111',
+    parentFormName + '_FAX' => '222-222-2222'
 }
 
 udMap = HashMap.new(udHash)

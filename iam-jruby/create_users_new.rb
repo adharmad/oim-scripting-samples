@@ -7,11 +7,11 @@ include_class 'java.util.HashMap'
 include_class 'java.util.Hashtable'
  
  
-prefix = 'krishna'
+prefix = 'karpov'
 count = 1000
  
 jndi = Hashtable.new({
-    'java.naming.provider.url' => 't3://adc2100904.us.oracle.com:7001/oim',
+    'java.naming.provider.url' => 't3://host:port/oim',
     'java.naming.factory.initial' => 'weblogic.jndi.WLInitialContextFactory'
 })
 

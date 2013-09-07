@@ -53,6 +53,8 @@ include_class 'oracle.iam.reconciliation.api.EventMgmtService'
 include_class 'oracle.iam.scheduler.api.SchedulerService'
 include_class 'oracle.iam.accesspolicy.api.AccessPolicyService'
 include_class 'oracle.iam.configservice.api.ConfigManager'
+include_class 'oracle.iam.provisioning.api.EntitlementService'
+include_class 'oracle.iam.provisioning.api.ProvisioningService'
 #include_class 'oracle.iam.platform.authopss.api.EntityPublicationService'
 #include_class 'oracle.iam.platformservice.api.EntityPublicationService'
 #include_class 'oracle.iam.provisioning.api.ApplicationInstanceService'
@@ -94,12 +96,14 @@ class XLAPIClient
             'apsvc' => AccessPolicyService.java_class,
             'dc' => DataCollectionOperationsIntf.java_class,
             'prop' => OIMtcPropertyOperationsIntf.java_class,
-            'cfgmgr' => ConfigManager.java_class
+            'cfgmgr' => ConfigManager.java_class,
+            'ent' => EntitlementService.java_class,
             #'eps' => EntityPublicationService.java_class,
             #'aisvc' => ApplicationInstanceService.java_class,
             #'unauthselfsvc' => UnauthenticatedSelfService.java_class
             #'provsvc' => ProvisioningService.java_class,
-            #'provint' => ProvisioningServiceInternal.java_class
+            'provint' => ProvisioningServiceInternal.java_class,
+            'lookup' => OIMtcLookupOperationsIntf.java_class
         }
     end
 
